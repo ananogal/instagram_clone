@@ -1,0 +1,8 @@
+<%if @photos.any? %>
+	<%@photos.each do |photo|%>
+		<h2><%= photo.title%></h2>
+	<%end%>
+<%else%>
+	<h3>No photos yet</h3>
+<%end%>
+<a href='/photos/new'>Add a photo</a>
