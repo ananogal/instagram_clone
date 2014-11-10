@@ -1,7 +1,7 @@
 <%if @photos.any? %>
 	<%@photos.each do |photo|%>
 		<%= image_tag photo.image.url(:thumb) %>
-		<h2><%= photo.title%></h2>
+		<h2><%= link_to "#{photo.title}",  photo_path(photo)%></h2>
 		<h3><%=photo.description%></h3>
 		<% if photo.comments.any?%>
 			<ul>
@@ -15,8 +15,10 @@
 			<p>No comments.</p>
 		<% end%>
 		<aside>
-			<%= link_to "Edit Photo", edit_photo_path(photo)%>
-			<%= link_to "Delete Photo", photo_path(photo), method: :delete %>
+			<% if current_user == photo.user%>
+				<%= link_to "Edit Photo", edit_photo_path(photo)%>
+				<%= link_to "Delete Photo", photo_path(photo), method: :delete %>
+			<%end%>
 			<%= link_to "Comment #{photo.title}", new_photo_comment_path(photo)%>
 		</aside>
 	<%end%>
