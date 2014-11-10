@@ -10,7 +10,11 @@ class PhotosController < ApplicationController
 
 	def create
 		@photo = Photo.create(params[:photo].permit(:title, :description, :image))
-		redirect_to '/photos'
+		if @photo.save
+			redirect_to '/photos'
+		else
+			render 'new'
+		end
 	end
 
 	def edit

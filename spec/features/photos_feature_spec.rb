@@ -32,6 +32,16 @@ describe 'photos' do
 			attach_file "Image", 'public/images/thumb/missing.png'
 			click_button 'Create Photo'
 		end 
+
+		it 'should give a title with 3 charaters' do
+			visit '/photos'
+			click_link 'Add a photo'
+			fill_in 'Title', with: 'hi'
+			fill_in 'Description', with: "description for photo"
+			click_button 'Create Photo'
+ 			expect(page).to have_content 'error'
+		end
+
 	end
 
 	context 'editing a photo' do
@@ -51,9 +61,7 @@ describe 'photos' do
 		it 'should let a user to delete a photo' do
 			@photo = Photo.create(title: 'title for photo', description: 'description for photo')
 			visit '/photos'
-			save_and_open_page
 			click_link 'Delete Photo'
-
 			expect(page).to have_content 'Photo deleted successfully'
 			expect(current_path).to eq '/photos'
 		end

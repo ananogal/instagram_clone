@@ -3,9 +3,21 @@
 		<%= image_tag photo.image.url(:thumb) %>
 		<h2><%= photo.title%></h2>
 		<h3><%=photo.description%></h3>
+		<% if photo.comments.any?%>
+			<ul>
+				<%photo.comments.each do |comment|%>
+					<li>	
+						<%= comment.thoughts%>
+					</li>	
+				<% end%>
+			</ul>
+		<%else%>
+			<p>No comments.</p>
+		<% end%>
 		<aside>
 			<%= link_to "Edit Photo", edit_photo_path(photo)%>
 			<%= link_to "Delete Photo", photo_path(photo), method: :delete %>
+			<%= link_to "Comment #{photo.title}", new_photo_comment_path(photo)%>
 		</aside>
 	<%end%>
 <%else%>

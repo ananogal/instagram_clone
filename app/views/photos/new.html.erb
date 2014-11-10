@@ -7,3 +7,14 @@
 	<%= f.file_field :image %>
 	<%= f.submit %>
 <% end %>
+
+<% if @photo.errors.any? %>
+  <div id="errors" >
+    <h2> <%= pluralize(@photo.errors.count, "error") %> prohibited this photo from being saved: </h2>
+    <ul>
+      <% @photo.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
