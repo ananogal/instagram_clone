@@ -1,6 +1,12 @@
 <%if @photos.any? %>
 	<%@photos.each do |photo|%>
+		<%= image_tag photo.image.url(:thumb) %>
 		<h2><%= photo.title%></h2>
+		<h3><%=photo.description%></h3>
+		<aside>
+			<%= link_to "Edit Photo", edit_photo_path(photo)%>
+			<%= link_to "Delete Photo", photo_path(photo), method: :delete %>
+		</aside>
 	<%end%>
 <%else%>
 	<h3>No photos yet</h3>

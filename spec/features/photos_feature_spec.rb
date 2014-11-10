@@ -33,4 +33,29 @@ describe 'photos' do
 			click_button 'Create Photo'
 		end 
 	end
+
+	context 'editing a photo' do
+		it 'should let a user to edit a photo' do
+			@photo = Photo.create(title: 'title for photo', description: 'description for photo')
+			visit '/photos'
+			click_link 'Edit Photo'
+			fill_in 'Title', with: 'Hello'
+			fill_in 'Description', with: 'another description'
+			click_button 'Update Photo'
+			expect(page).to have_content 'Hello'
+			expect(current_path).to eq '/photos'
+		end	
+	end
+
+	context 'deleting photo' do
+		it 'should let a user to delete a photo' do
+			@photo = Photo.create(title: 'title for photo', description: 'description for photo')
+			visit '/photos'
+			save_and_open_page
+			click_link 'Delete Photo'
+
+			expect(page).to have_content 'Photo deleted successfully'
+			expect(current_path).to eq '/photos'
+		end
+	end
 end
