@@ -26,5 +26,11 @@ describe 'photos' do
 			expect(page).to have_content 'A photo'
 			expect(current_path).to eq '/photos'
 		end
+
+		it 'should upload an image to photo' do
+			visit '/photos/new'
+			attach_file "Image", 'public/images/thumb/missing.png'
+			click_button 'Create Photo'
+		end 
 	end
 end
