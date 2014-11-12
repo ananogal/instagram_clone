@@ -4,7 +4,7 @@ describe 'commenting' do
 	it 'allows users to leave a comment thought a form' do
 		@photo = Photo.create(title: 'title for photo', description: 'description for photo')
 		visit '/photos'
-		click_link 'Comment title for photo'
+		click_link 'Comment'
 		fill_in 'Thoughts', with: "Cool!"
 		click_button 'Leave Comment'
 		expect(current_path).to eq '/photos'
